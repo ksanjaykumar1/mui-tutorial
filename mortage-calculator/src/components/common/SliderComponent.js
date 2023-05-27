@@ -35,10 +35,11 @@ function SliderComponent({
       />
       <Stack direction={'row'} justifyContent={'space-between'}>
         <Typography variant='caption' color='text.secondary'>
+          {unit}
           {min}
         </Typography>
         <Typography variant='caption' color='text.secondary'>
-          {max}
+          {unit}{max}
         </Typography>
       </Stack>
     </>
