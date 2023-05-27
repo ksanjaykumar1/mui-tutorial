@@ -13,20 +13,35 @@ function SliderSelect({ setData, data }) {
           max={bank_limit}
           defaultValue={data.homeValue}
           step={10}
-          onChange={(e, value) => setData({ ...data, homeValue: value })}
+          onChange={(e, value) =>
+            setData({
+              ...data,
+              homeValue: value,
+              downPayment: value * 0.2,
+              loanAmount: value * 0.8,
+            })
+          }
           unit={'$'}
           amount={data.homeValue}
+          value={data.homeValue}
         />
 
         <SliderComponent
           label='Down Payment'
-          min={10}
+          min={0}
           max={data.homeValue}
           defaultValue={data.downPayment}
           step={10}
-          onChange={(e, value) => setData({ ...data, downPayment: value })}
+          onChange={(e, value) =>
+            setData({
+              ...data,
+              downPayment: value,
+              loanAmount: data.homeValue - value,
+            })
+          }
           unit={'$'}
           amount={data.downPayment}
+          value={data.downPayment}
         />
         <SliderComponent
           label='Loan Amount'
@@ -34,9 +49,16 @@ function SliderSelect({ setData, data }) {
           max={data.homeValue}
           defaultValue={data.loanAmount}
           step={10}
-          onChange={(e, value) => setData({ ...data, loanAmount: value })}
+          onChange={(e, value) => 
+            setData({
+              ...data,
+              loanAmount: value,
+              downPayment: data.homeValue - value,
+            })
+          }
           unit={'$'}
           amount={data.loanAmount}
+          value={data.loanAmount}
         />
         <SliderComponent
           label='Interest Rate'
@@ -44,9 +66,10 @@ function SliderSelect({ setData, data }) {
           max={18}
           defaultValue={data.interestRate}
           step={0.5}
-          onChange={(e, value) => setData({...data, interestRate:value})}
+          onChange={(e, value) => setData({ ...data, interestRate: value })}
           unit={'%'}
           amount={data.interestRate}
+          value={data.interestRate}
         />
       </Stack>
     </Stack>
